@@ -1,23 +1,14 @@
-//router 
-import { Link } from "react-router-dom";
+//components
+import {FilterComponent} from './FilterComponent.jsx'
+import {SingleCardComponent} from './SingleCardComponent.jsx';
 
-export const HomeComponent = ({data}) => {
+export const HomeComponent = () => {
     return (
-        <div>
-          {
-              data?
-               (data.map( (item, index) => {
-                    
-                    return (
-                        <div className="p-3 text-black font-roboto border-card rounded-lg m-2 p-4 relative" key={index}>
-                            <div className="flex justify-between pb-2">
-                                <div>category</div>
-                                <div> <Link to={`/category/${item}`}>{item}</Link></div>
-                            </div>
-                        </div>
-                    )
-                })): <p>cargando...</p>
-            }  
+    <div className="flex">
+        <FilterComponent />
+        <div className="lay_out">
+            <SingleCardComponent/>
         </div>
-    )
+    </div>
+        )
 }
