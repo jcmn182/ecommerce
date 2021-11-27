@@ -19,7 +19,7 @@ export const Navbar = () => {
                 <Link to="/favorites" className="pr-8"><BsHeart/></Link>
                 <div className="dropdown">
                     <Link to="/cart" className="relative">
-                        <p className="absolute text-xs top-2 left-2">{cart.length>0?cart.length:cart.length>9?"+9":" "}</p><BsBag/></Link>
+                        <p className="absolute text-xs top-2 left-2">{cart.length>0?cart.length:" "}</p><BsBag/></Link>
                     <DropDownComponent/>
                 </div>
             </div>    
