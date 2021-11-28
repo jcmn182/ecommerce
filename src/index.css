@@ -16,8 +16,8 @@ body {
 
 .lay_out{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    width: 80%;
+  grid-template-columns: repeat(auto-fit,minmax(250px,5fr));
+    width:80%;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -27,7 +27,7 @@ body {
   height: 100vh;
   margin: auto 0;
   width: 20%;
-  overflow: hidden;
+  
 }
 
 
@@ -56,9 +56,18 @@ body {
       width: 100%;
       }
 
-      .lay_out_form{
-        width: 0;
-      }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .lay_out{
+      width:60%;
+  }
+  
+  .lay_out_form{
+    width: 40%;
+    
+  }
 }
 
 @media only screen and (max-width: 400px) {

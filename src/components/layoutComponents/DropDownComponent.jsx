@@ -10,7 +10,7 @@ export const DropDownComponent = () => {
     const {cart,removeFromCart} = useContext(DataContext);
     return (
             <div className="dropdown-content">
-        <div className="h-56 overflow-y-auto">
+        <div className="h-40 overflow-y-auto">
             {cart.length>0?(
                 cart.map(item=>{
                     return(

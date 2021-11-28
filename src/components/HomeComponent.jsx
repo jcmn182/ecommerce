@@ -9,6 +9,6 @@ export const HomeComponent = () => {
         <div className="lay_out">
             <SingleCardComponent/>
         </div>
-    </div>
+    </div> 
         )
 }

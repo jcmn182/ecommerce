@@ -8,37 +8,50 @@ import {RatingComponent} from './RatingComponent.jsx';
 import {BiTrashAlt} from 'react-icons/bi';
 
 export const CartComponent = () => {
-    const {cart,removeFromCart} = useContext(DataContext);
+    const {cart,removeFromCart,addQty} = useContext(DataContext);
     const [total, setTotal] = useState()
     useEffect(() => {
-       setTotal(cart.reduce((acc,curr) => acc + Number(curr.price),0 ))
+       setTotal(cart.reduce((acc,curr) => acc + Number(curr.price)* curr.qty, 0 ))
     }, [cart])
     return (
-        <div className="h-screen overflow-y-auto flex">
-        <div className="flex flex-col w-9/12">
+        <div className="sm:flex">
+        <div className="flex flex-col w-full sm:w-9/12 sm:h-screen overflow-y-auto">
         {
             cart?.map( item => {
                 return(
-                    <div className="flex text-xl items-center justify-around p-5
-                    border-solid border-b-2" key={item.id} >
-                        <div className="flex justify-around w-full">    
-                                <img src={item.img} alt="img" className="h-24 w-24 scale-50"/>
-                            <div className="px-3 w-full">
-                                <p className="p-0.5 text-gray-700 truncate w-full">{item.name}</p>
+                    <div className="flex text-xs sm:text-xl items-center justify-around m-5 py-4
+                        border-solid border-b-2" key={item.id} >
+                        <img src={item.img} alt="img" className=" h-14 w-10 sm:h-24 w-24 scale-50"/>
+                        <div className="px-3 w-full flex justify-between">
+                            <div>
+                                <p className="p-0.5 text-gray-700 truncate ">{item.name}</p>
                                 <p className="p-0.5 text-gray-500"> $ {item.price}</p>
+                            </div> 
+                            <div>  
                                 <div className="flex py-1 text-black">
-                                <RatingComponent rate={item.raitings}/>
+                                    <RatingComponent rate={item.raitings}/>
                                 </div>
-                                <BiTrashAlt className="text-xl" onClick={()=>{removeFromCart(item.id)}}/>
-                            </div>
+                                <div className="flex justify-between items-center">
+                                    <BiTrashAlt className="text-xl" onClick={()=>{removeFromCart(item.id)}}/>
+                                    <select value={item.qty} onChange={(e)=>{addQty(e.target.value, item.id)}}>
+                                            {[...Array(item.inStock).keys()].map((x) => (
+                                                <option key={x + 1}>{x + 1}</option>
+                                            ))}
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                     </div>
+                    
                 )})
             }
         </div>
-            <div className="">
-                <p>Sub total ({cart.length}) {cart.length>1?"items":"item"}</p>
-                <p>total {total}</p>
+            <div className="p-2 sm:p-0">
+                <p className="text-3xl pb-3 ">Sub total ({cart.length}) {cart.length>1?"items":"item"}</p>
+                <p className="text-lg py-4">total ${total}</p>
+                <button  className="w-full p-4 sm:p-2 bg-black text-white rounded-sm" >
+                    Buy
+                </button>
             </div>
         </div>
     )

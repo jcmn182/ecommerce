@@ -3,7 +3,6 @@ import {Routes,Route} from "react-router-dom";
 //components
 import {HomeComponent} from './components/HomeComponent.jsx'
 import {CartComponent} from './components/CartComponent.jsx'
-import {FavoritesComponent} from './components/FavoritesComponent.jsx'
 
 import {MainLayOut} from './components/layoutComponents/MainLayOut.jsx'
 
@@ -14,7 +13,6 @@ function App() {
     <Routes>
           <Route  element={ <MainLayOut/>}>
             <Route path="/" element={<HomeComponent/>}/>
-            <Route exact path="favorites" element={<FavoritesComponent/>} />
             <Route exact path="cart" element={<CartComponent/>} />
           </Route>
     </Routes>

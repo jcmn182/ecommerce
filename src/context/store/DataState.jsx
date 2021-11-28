@@ -2,33 +2,23 @@ import {useReducer} from 'react';
 import {DataReducer} from './DataReducer';
 import {DataContext} from './DataContext';
 //faker data
-import faker from 'faker';
+
 const DataState = (props) => {
 
-    const products = [...Array(20)].map(()=>({
-        id:faker.datatype.uuid(),
-        name:faker.commerce.productName(),
-        price:faker.commerce.price(),
-        img:faker.random.image(),
-        inStock:faker.random.arrayElement([0,3,5,6,7]),
-        fastDelivery:faker.datatype.boolean(),
-        raitings:faker.random.arrayElement([1,2,3,4,5])
-}))
-
+    // initial state cart 
     const initialState = {
-        products:products,
         cart:[]
     }
-    
+    // reducer to manipulate state cart 
     const [state, dispatch] = useReducer(DataReducer,initialState)
     
+    // dispatchs to manipulate state cart
     const addCart  = (prod) => {
         dispatch({
             type:'ADD_TO_CART',
             payload:prod
         })
     }
-
     const removeFromCart  = (id) => {
         dispatch({
             type:'REMOVE_FROM_CART',
@@ -36,33 +26,21 @@ const DataState = (props) => {
         })
 
     }
-/*
-    const getItems  = async (category) =>{
-        try{
-            dispatch({
-                type:"CLEAN"
-            }
-            )
-        const response = await fetch(`https://fakestoreapi.com/products/category/${category}`)//.then((status)=>console.log(status))
-        const result =  await response.json();
-        dispatch({
-            type:'GET_ITEMS',
-            payload:result,
-        })
-    }
-    catch(err) {
-            alert(err); // TypeError: failed to fetch
-            console.log(err)
-          }
-    }*/
-  
-    
+    const addQty = (value,id)=>
+    dispatch({
+        type: "CHANGE_CART_QTY",
+        payload: {
+          id: id,
+          qty:value,
+        },
+      })
+
     return(
         <DataContext.Provider value = {{
-            products:state.products,
             cart:state.cart,
             addCart,
-            removeFromCart
+            removeFromCart,
+            addQty
         }}>
            {props.children}
         </DataContext.Provider>
